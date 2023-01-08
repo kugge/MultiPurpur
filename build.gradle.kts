@@ -61,24 +61,24 @@ paperweight {
     remapRepo.set("https://maven.fabricmc.net/")
     decompileRepo.set("https://maven.quiltmc.org")
 
-    useStandardUpstream("pufferfish") {
-        url.set(github("pufferfish-gg", "Pufferfish"))
-        ref.set(providers.gradleProperty("pufferfishRef"))
+    useStandardUpstream("Purpur") {
+        url.set(github("PurpurMC", "Purpur"))
+        ref.set(providers.gradleProperty("purpurRef"))
         
         withStandardPatcher {
-            apiSourceDirPath.set("pufferfish-api") 
+            apiSourceDirPath.set("Purpur-API") 
             apiPatchDir.set(layout.projectDirectory.dir("patches/api"))
             apiOutputDir.set(layout.projectDirectory.dir("MultiPaper-API"))
 
-            serverSourceDirPath.set("pufferfish-server")
+            serverSourceDirPath.set("Purpur-Server")
             serverPatchDir.set(layout.projectDirectory.dir("patches/server"))
             serverOutputDir.set(layout.projectDirectory.dir("MultiPaper-Server"))
         }
     }
 
-    tasks.register("pufferfishRefLatest") {
-        // Update the paperRef in gradle.properties to be the latest commit
-        val tempDir = layout.cacheDir("pufferfishRefLatest");
+    tasks.register("purpurRefLatest") {
+        // Update the paperRef in gradle.properties to be the latest commit.3
+        val tempDir = layout.cacheDir("purpurRefLatest");
         val file = "gradle.properties";
         
         doFirst {
@@ -86,15 +86,15 @@ paperweight {
                     val sha: String
             )
 
-            val pufferfishLatestCommitJson = layout.cache.resolve("pufferfishLatestCommit.json");
-            download.get().download("https://api.github.com/repos/pufferfish-gg/Pufferfish/commits/ver/1.19", pufferfishLatestCommitJson);
-            val pufferfishLatestCommit = gson.fromJson<paper.libs.com.google.gson.JsonObject>(pufferfishLatestCommitJson)["sha"].asString;
+            val purpurLatestCommitJson = layout.cache.resolve("purpurLatestCommit.json");
+            download.get().download("https://api.github.com/repos/PurpurMC/Purpur/commits/ver/1.19.3", purpurLatestCommitJson);
+            val purpurLatestCommit = gson.fromJson<paper.libs.com.google.gson.JsonObject>(purpurLatestCommitJson)["sha"].asString;
 
             copy {
                 from(file)
                 into(tempDir)
                 filter { line: String ->
-                    line.replace("pufferfishRef = .*".toRegex(), "pufferfishRef = $pufferfishLatestCommit")
+                    line.replace("purpurRef = .*".toRegex(), "purpurRef = $purpurLatestCommit")
                 }
             }
         }
