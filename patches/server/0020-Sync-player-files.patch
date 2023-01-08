@@ -5,7 +5,7 @@ Subject: [PATCH] Sync player files
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index a0c19503aabab5378d672a30163d35a5ba05b6c1..c0083a94dfa3ee5f6f53a95e2c36cd8c9fa8fd9c 100644
+index ce42e91a95ccd42deff65e1942b918e9d789001b..99477689bdf3e7d2fc1d66b56987aeb8c2484b65 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
 @@ -48,6 +48,8 @@ import net.minecraft.server.players.PlayerList;
@@ -33,7 +33,7 @@ index a0c19503aabab5378d672a30163d35a5ba05b6c1..c0083a94dfa3ee5f6f53a95e2c36cd8c
  
                  try {
                      jsonreader.setLenient(false);
-@@ -213,8 +219,9 @@ public class PlayerAdvancements {
+@@ -214,8 +220,9 @@ public class PlayerAdvancements {
          this.registerListeners(advancementLoader);
      }
  
@@ -45,7 +45,7 @@ index a0c19503aabab5378d672a30163d35a5ba05b6c1..c0083a94dfa3ee5f6f53a95e2c36cd8c
          Map<ResourceLocation, AdvancementProgress> map = Maps.newHashMap();
          Iterator iterator = this.advancements.entrySet().iterator();
  
-@@ -235,7 +242,22 @@ public class PlayerAdvancements {
+@@ -236,7 +243,22 @@ public class PlayerAdvancements {
  
          jsonelement.getAsJsonObject().addProperty("DataVersion", SharedConstants.getCurrentVersion().getWorldVersion());
  
@@ -69,10 +69,10 @@ index a0c19503aabab5378d672a30163d35a5ba05b6c1..c0083a94dfa3ee5f6f53a95e2c36cd8c
  
              try {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 7073569245e2180df79ed00f8c5d3464e41ff3a3..31b4a7d93b0435860ceb8f3c726dbd924c65b2d8 100644
+index 6af57d1a152c21b49bdb56351dd92f5ba15dea85..cc025da710ba145405a5422cf3e6da5081848216 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -534,6 +534,7 @@ public abstract class PlayerList {
+@@ -535,6 +535,7 @@ public abstract class PlayerList {
          if (!player.getBukkitEntity().isPersistent()) return; // CraftBukkit
          player.lastSave = MinecraftServer.currentTick; // Paper
          this.playerIo.save(player);
@@ -233,7 +233,7 @@ index 601f8099f74e81c17600566b3c9b7a6dd39c9bcb..64c581abc3b74ef25e0571e9bada5a42
  
              if (file1.exists()) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index b32f44beab2c9790ee2da8403e362e8b3ecc6175..432b168690fd79ffb27d8301c1fd897d232c0f9f 100644
+index ed5ee1f76aad6c27e742cb421a8e94990ebb7c59..2147f7df5fa25edb7bd128ab405735883dbaeec4 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -156,6 +156,7 @@ import org.bukkit.scoreboard.Scoreboard;
@@ -244,7 +244,7 @@ index b32f44beab2c9790ee2da8403e362e8b3ecc6175..432b168690fd79ffb27d8301c1fd897d
  
  @DelegateDeserialization(CraftOfflinePlayer.class)
  public class CraftPlayer extends CraftHumanEntity implements Player {
-@@ -1336,6 +1337,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1345,6 +1346,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
  
      @Override
      public void saveData() {

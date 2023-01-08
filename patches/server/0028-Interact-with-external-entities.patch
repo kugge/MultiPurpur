@@ -20,7 +20,7 @@ index 21068f766b75c414d5818073b7dca083d8ff4409..ddea3f0be603d70ae59c9c783e20aad0
          this.action = type;
          this.usingSecondaryAction = playerSneaking;
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index eb1ecd7bed47041333cc006e34e0723f7ee04d11..276f27918abe8e0474628c6e3ef333e931ea4152 100644
+index 653d73ab16e855459415e04eff715f905eb05faa..4e958ed025dd45961a13d6a6764552195068ebcd 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -244,6 +244,7 @@ import org.bukkit.inventory.SmithingInventory;
@@ -31,7 +31,7 @@ index eb1ecd7bed47041333cc006e34e0723f7ee04d11..276f27918abe8e0474628c6e3ef333e9
  import puregero.multipaper.MultiPaperInventoryHandler;
  import puregero.multipaper.MultiPaperPlayerHandler;
  import puregero.multipaper.externalserverprotocol.PlayerActionPacket;
-@@ -2773,6 +2774,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2863,6 +2864,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
          this.player.resetLastActionTime();
          this.player.setShiftKeyDown(packet.isUsingSecondaryAction());
          if (entity != null) {
@@ -41,7 +41,7 @@ index eb1ecd7bed47041333cc006e34e0723f7ee04d11..276f27918abe8e0474628c6e3ef333e9
                  return;
              }
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 57fd120720a288ddb18bd394f58059cd5406c0a1..d4f602915ece925e71467ad90ee23f9f3a14cd87 100644
+index 60c5f355c0e57f7e13905519655e2f8cc61e2ec8..35c1706986ae3e9677c04900f026a46f4feeda21 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -7,12 +7,14 @@ import com.google.common.collect.Lists;
@@ -98,7 +98,7 @@ index 57fd120720a288ddb18bd394f58059cd5406c0a1..d4f602915ece925e71467ad90ee23f9f
  // CraftBukkit end
  
  public abstract class Entity implements Nameable, EntityAccess, CommandSource {
-@@ -2721,6 +2730,13 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -2733,6 +2742,13 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
                  }).forEach((entity2) -> {
                      CriteriaTriggers.START_RIDING_TRIGGER.trigger((ServerPlayer) entity2);
                  });
@@ -112,7 +112,7 @@ index 57fd120720a288ddb18bd394f58059cd5406c0a1..d4f602915ece925e71467ad90ee23f9f
                  return true;
              }
          }
-@@ -2748,10 +2764,27 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -2760,10 +2776,27 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
      public void stopRiding(boolean suppressCancellation) {
          // Paper end
          if (this.vehicle != null) {
@@ -141,7 +141,7 @@ index 57fd120720a288ddb18bd394f58059cd5406c0a1..d4f602915ece925e71467ad90ee23f9f
  
      }
 diff --git a/src/main/java/net/minecraft/world/entity/player/Player.java b/src/main/java/net/minecraft/world/entity/player/Player.java
-index fda614f6770f4e084de1f9a2b42ca0ef4c6be7e7..b3d488983a7f3e0a57a717e67a7a8486ca5c69e4 100644
+index 6f93be1f38448cd6d8d1b611c2202b0ccff08a41..463c809d111a453807b8b2aeef3484d54681d950 100644
 --- a/src/main/java/net/minecraft/world/entity/player/Player.java
 +++ b/src/main/java/net/minecraft/world/entity/player/Player.java
 @@ -123,6 +123,7 @@ import org.bukkit.event.entity.EntityCombustByEntityEvent;
@@ -152,7 +152,7 @@ index fda614f6770f4e084de1f9a2b42ca0ef4c6be7e7..b3d488983a7f3e0a57a717e67a7a8486
  // CraftBukkit end
  
  public abstract class Player extends LivingEntity {
-@@ -623,6 +624,7 @@ public abstract class Player extends LivingEntity {
+@@ -663,6 +664,7 @@ public abstract class Player extends LivingEntity {
      }
  
      private void touch(Entity entity) {

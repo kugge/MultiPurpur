@@ -5,10 +5,10 @@ Subject: [PATCH] Add --add-plugin-dir command line option
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 79011ef7db02a34c4c6b485602ecb954cf068673..683e65a8676771d6b202afd74e368ad31abd3b55 100644
+index 92f54ac12ccc84de4e84eb01f01a70f1f4578769..baf879aeb7902ba795b8895bf284ae336b743efe 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-@@ -481,6 +481,20 @@ public final class CraftServer implements Server {
+@@ -526,6 +526,20 @@ public final class CraftServer implements Server {
              }
              list.add(file);
          }
@@ -30,10 +30,10 @@ index 79011ef7db02a34c4c6b485602ecb954cf068673..683e65a8676771d6b202afd74e368ad3
      }
      // Paper end
 diff --git a/src/main/java/org/bukkit/craftbukkit/Main.java b/src/main/java/org/bukkit/craftbukkit/Main.java
-index 96507527661c40d5d62b98678922415aa1c21216..507c6a2b9d954dfe2c718d5310138514eb3c8b6e 100644
+index 175ce93bd08e0ebcff419f15d139981c720ed307..8660128152702e56396a6f302fd4384e08b784ba 100644
 --- a/src/main/java/org/bukkit/craftbukkit/Main.java
 +++ b/src/main/java/org/bukkit/craftbukkit/Main.java
-@@ -172,6 +172,12 @@ public class Main {
+@@ -186,6 +186,12 @@ public class Main {
                          .ofType(File.class)
                          .defaultsTo(new File("multipaper.yml"))
                          .describedAs("Yml file");

@@ -5,7 +5,7 @@ Subject: [PATCH] Sync advancements in real time
 
 
 diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
-index c0083a94dfa3ee5f6f53a95e2c36cd8c9fa8fd9c..e4ac3ca8ea9c77f3ddcc4ec220f62d3c952b97f2 100644
+index 99477689bdf3e7d2fc1d66b56987aeb8c2484b65..701c0a7db02561e8d1137a3d811bf0e05bfe2c9b 100644
 --- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
 +++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
 @@ -50,6 +50,7 @@ import net.minecraft.world.level.GameRules;
@@ -16,7 +16,7 @@ index c0083a94dfa3ee5f6f53a95e2c36cd8c9fa8fd9c..e4ac3ca8ea9c77f3ddcc4ec220f62d3c
  
  public class PlayerAdvancements {
  
-@@ -305,10 +306,11 @@ public class PlayerAdvancements {
+@@ -306,10 +307,11 @@ public class PlayerAdvancements {
                  return false;
              }
              // Paper end

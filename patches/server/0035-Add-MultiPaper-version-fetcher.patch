@@ -5,15 +5,15 @@ Subject: [PATCH] Add MultiPaper version fetcher
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
-index a3c6b3dd87022e2def1f12da7c44c8d529191d1e..4eec5d5ae2df126a37cae8b62ac9c5b6c6c578e7 100644
+index 51c96095cf7092125f79a197f797dc7965647574..7ba1ef16909910e0062116bb02ce2830656bcd19 100644
 --- a/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 +++ b/src/main/java/org/bukkit/craftbukkit/util/CraftMagicNumbers.java
 @@ -433,7 +433,7 @@ public final class CraftMagicNumbers implements UnsafeValues {
  
      @Override
      public com.destroystokyo.paper.util.VersionFetcher getVersionFetcher() {
--        return new gg.pufferfish.pufferfish.PufferfishVersionFetcher(); // Pufferfish
-+        return new puregero.multipaper.MultiPaperVersionFetcher(); // Pufferfish // MultiPaper
+-        return new com.destroystokyo.paper.PaperVersionFetcher(); // Purpur
++        return new puregero.multipaper.MultiPaperVersionFetcher(); // Purpur // MultiPaper
      }
  
      @Override

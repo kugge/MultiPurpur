@@ -5,7 +5,7 @@ Subject: [PATCH] Add multipaper key-value data storage
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 2e889f876375920d6c9b76aa0101753565fb2fd1..a666431085d582b7d8988a81d2659317db537329 100644
+index 90fe77894898898fc2734bb73cf8bd92f111e71b..6c4a68cffec8353105e978a42dc2797fb17cc098 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -257,8 +257,10 @@ import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -27,7 +27,7 @@ index 2e889f876375920d6c9b76aa0101753565fb2fd1..a666431085d582b7d8988a81d2659317
      private File container;
      private Thread inTabCompletion; // MultiPaper
      private WarningState warningState = WarningState.DEFAULT;
-@@ -923,6 +926,11 @@ public final class CraftServer implements Server {
+@@ -968,6 +971,11 @@ public final class CraftServer implements Server {
      public @NotNull String getLocalServerName() {
          return MultiPaperConfiguration.get().masterConnection.myName;
      }

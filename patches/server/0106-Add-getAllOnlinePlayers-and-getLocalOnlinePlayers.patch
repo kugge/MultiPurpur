@@ -5,7 +5,7 @@ Subject: [PATCH] Add getAllOnlinePlayers and getLocalOnlinePlayers
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 749684e194e2185553e4be5712ce49a049408362..6a6122e331ab3cebd842ce4f69cdee10472f32be 100644
+index 002d1bdf9ec722cf2b1a040c32067c67187fb2ab..c3008be61130e382a3cb0bb954c48bce61c47f39 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -117,6 +117,7 @@ public abstract class PlayerList {
@@ -24,7 +24,7 @@ index 749684e194e2185553e4be5712ce49a049408362..6a6122e331ab3cebd842ce4f69cdee10
          this.playersByName.put(player.getScoreboardName().toLowerCase(java.util.Locale.ROOT), player); // Spigot
          this.playersByUUID.put(player.getUUID(), player);
          // this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(entityplayer))); // CraftBukkit - replaced with loop below
-@@ -615,6 +617,7 @@ public abstract class PlayerList {
+@@ -618,6 +620,7 @@ public abstract class PlayerList {
          worldserver.removePlayerImmediately(entityplayer, Entity.RemovalReason.UNLOADED_WITH_PLAYER);
          entityplayer.getAdvancements().stopListening();
          this.players.remove(entityplayer);
@@ -32,7 +32,7 @@ index 749684e194e2185553e4be5712ce49a049408362..6a6122e331ab3cebd842ce4f69cdee10
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          this.server.getCustomBossEvents().onPlayerDisconnect(entityplayer);
          UUID uuid = entityplayer.getUUID();
-@@ -783,6 +786,7 @@ public abstract class PlayerList {
+@@ -786,6 +789,7 @@ public abstract class PlayerList {
          // MultiPaper end
          entityplayer.stopRiding(); // CraftBukkit
          this.players.remove(entityplayer);
@@ -40,7 +40,7 @@ index 749684e194e2185553e4be5712ce49a049408362..6a6122e331ab3cebd842ce4f69cdee10
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          entityplayer.getLevel().removePlayerImmediately(entityplayer, Entity.RemovalReason.DISCARDED);
          BlockPos blockposition = entityplayer.getRespawnPosition();
-@@ -920,6 +924,7 @@ public abstract class PlayerList {
+@@ -923,6 +927,7 @@ public abstract class PlayerList {
          if (!entityplayer.connection.isDisconnected()) {
              worldserver1.addRespawnedPlayer(entityplayer1);
              this.players.add(entityplayer1);
@@ -49,7 +49,7 @@ index 749684e194e2185553e4be5712ce49a049408362..6a6122e331ab3cebd842ce4f69cdee10
              this.playersByUUID.put(entityplayer1.getUUID(), entityplayer1);
          }
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa0101753565fb2fd1 100644
+index baf879aeb7902ba795b8895bf284ae336b743efe..90fe77894898898fc2734bb73cf8bd92f111e71b 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -292,6 +292,7 @@ public final class CraftServer implements Server {
@@ -83,7 +83,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
          this.serverVersion = CraftServer.class.getPackage().getImplementationVersion();
          this.structureManager = new CraftStructureManager(console.getStructureManager());
  
-@@ -625,10 +635,28 @@ public final class CraftServer implements Server {
+@@ -670,10 +680,28 @@ public final class CraftServer implements Server {
      }
      // Paper end
  
@@ -112,7 +112,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
  
      @Override
      @Deprecated
-@@ -643,7 +671,7 @@ public final class CraftServer implements Server {
+@@ -688,7 +716,7 @@ public final class CraftServer implements Server {
  
          String lowerName = name.toLowerCase(java.util.Locale.ENGLISH);
          int delta = Integer.MAX_VALUE;
@@ -121,7 +121,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
              if (player.getName().toLowerCase(java.util.Locale.ENGLISH).startsWith(lowerName)) {
                  int curDelta = Math.abs(player.getName().length() - lowerName.length());
                  if (curDelta < delta) {
-@@ -690,7 +718,7 @@ public final class CraftServer implements Server {
+@@ -735,7 +763,7 @@ public final class CraftServer implements Server {
  
          List<Player> matchedPlayers = new ArrayList<Player>();
  
@@ -130,7 +130,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
              String iterPlayerName = iterPlayer.getName();
  
              if (partialName.equalsIgnoreCase(iterPlayerName)) {
-@@ -2105,7 +2133,7 @@ public final class CraftServer implements Server {
+@@ -2202,7 +2230,7 @@ public final class CraftServer implements Server {
              }
          }
  
@@ -139,7 +139,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
  
          return players.toArray(new OfflinePlayer[players.size()]);
      }
-@@ -2276,6 +2304,8 @@ public final class CraftServer implements Server {
+@@ -2373,6 +2401,8 @@ public final class CraftServer implements Server {
              return ImmutableList.of();
          }
  
@@ -148,7 +148,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
          List<String> offers;
          Player player = (Player) sender;
          if (message.startsWith("/") || forceCommand) {
-@@ -2287,6 +2317,8 @@ public final class CraftServer implements Server {
+@@ -2384,6 +2414,8 @@ public final class CraftServer implements Server {
          TabCompleteEvent tabEvent = new TabCompleteEvent(player, message, offers, message.startsWith("/") || forceCommand, pos != null ? io.papermc.paper.util.MCUtil.toLocation(((CraftWorld) player.getWorld()).getHandle(), new BlockPos(pos)) : null); // Paper
          this.getPluginManager().callEvent(tabEvent);
  
@@ -157,7 +157,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
          return tabEvent.isCancelled() ? Collections.EMPTY_LIST : tabEvent.getCompletions();
      }
  
-@@ -2321,7 +2353,7 @@ public final class CraftServer implements Server {
+@@ -2418,7 +2450,7 @@ public final class CraftServer implements Server {
          List<String> completions = new ArrayList<String>();
          PlayerChatTabCompleteEvent event = new PlayerChatTabCompleteEvent(player, message, completions);
          String token = event.getLastToken();
@@ -166,7 +166,7 @@ index 683e65a8676771d6b202afd74e368ad31abd3b55..2e889f876375920d6c9b76aa01017535
              if (player.canSee(p) && StringUtil.startsWithIgnoreCase(p.getName(), token)) {
                  completions.add(p.getName());
              }
-@@ -2810,14 +2842,14 @@ public final class CraftServer implements Server {
+@@ -2920,14 +2952,14 @@ public final class CraftServer implements Server {
  
          @Override
          public void broadcast(BaseComponent component) {

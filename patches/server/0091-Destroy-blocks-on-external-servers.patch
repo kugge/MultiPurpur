@@ -5,7 +5,7 @@ Subject: [PATCH] Destroy blocks on external servers
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 5871c0911bb6ed7163fc3c8bebc2e7feb4704a0b..485a17a87fe3bfa5d22cf834c31005ba0c1671c4 100644
+index eea27d2c7ec6dfdd61ab49790219a18743ed10bf..b20ad067f0891c7e15f7555e346644581a626cd5 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -235,6 +235,7 @@ public class ServerPlayer extends Player {
@@ -17,7 +17,7 @@ index 5871c0911bb6ed7163fc3c8bebc2e7feb4704a0b..485a17a87fe3bfa5d22cf834c31005ba
      public int containerUpdateDelay; // Paper // MultiPaper - make public
      public long loginTime; // Paper
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
-index 58b093bb1de78ee3b3b2ea364aa50474883f443a..97f151bdae8232ebd6d3864c55d6816d37166454 100644
+index 744c936c3aa9bd7bcf43ac3d78a08ece9cde87c3..1e414cbb85d075f17c42da34fdf2dc4b21aaeb78 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayerGameMode.java
 @@ -3,6 +3,8 @@ package net.minecraft.server.level;
@@ -70,10 +70,10 @@ index 58b093bb1de78ee3b3b2ea364aa50474883f443a..97f151bdae8232ebd6d3864c55d6816d
          // CraftBukkit start - fire BlockBreakEvent
          org.bukkit.block.Block bblock = CraftBlock.at(level, pos);
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 54f80a3afaae69551ab06c4caebda5f23ae93ed4..d699395203cba5adbec82961981087bae47f154b 100644
+index 1ca016146af66e21769d35cff1bd6e91587109c6..eda0c1600a2ad74ba88cfd9fbf82b6f84c69b41e 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-@@ -1908,6 +1908,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1988,6 +1988,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
                  this.player.gameMode.captureSentBlockEntities = true;
                  // Paper end - send block entities after prediction
                  this.player.gameMode.handleBlockBreakAction(blockposition, packetplayinblockdig_enumplayerdigtype, packet.getDirection(), this.player.level.getMaxBuildHeight(), packet.getSequence());

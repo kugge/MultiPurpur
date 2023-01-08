@@ -5,7 +5,7 @@ Subject: [PATCH] Sync player inventories between servers
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 0160782f017926f634f7a5e4cfb27885736d6120..00220fa5665f247639078faeb5a07cc788e423bd 100644
+index 78436d9102d0f2c313a6155b1d50baf0ded8e85f..65c55890f030a54c06d03a812dbef9d4d882f42c 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -172,8 +172,7 @@ import org.bukkit.event.player.PlayerPortalEvent;
@@ -27,7 +27,7 @@ index 0160782f017926f634f7a5e4cfb27885736d6120..00220fa5665f247639078faeb5a07cc7
      public boolean wonGame;
      public int containerUpdateDelay; // Paper // MultiPaper - make public
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b8bb660ee 100644
+index 4044d3a4f6f5986cced3e08155585910e1cbf16d..823bc47aed8255fb19ea596a69c30522fba24d94 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -244,6 +244,8 @@ import org.bukkit.inventory.SmithingInventory;
@@ -39,7 +39,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
  import puregero.multipaper.externalserverprotocol.PlayerRemovePacket;
  // CraftBukkit end
  
-@@ -811,6 +813,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -848,6 +850,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleAcceptTeleportPacket(ServerboundAcceptTeleportationPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -47,7 +47,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          if (packet.getId() == this.awaitingTeleport) {
              if (this.awaitingPositionFromClient == null) {
                  this.disconnect(Component.translatable("multiplayer.disconnect.invalid_player_movement"), org.bukkit.event.player.PlayerKickEvent.Cause.INVALID_PLAYER_MOVEMENT); // Paper - kick event cause
-@@ -844,6 +847,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -882,6 +885,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleRecipeBookChangeSettingsPacket(ServerboundRecipeBookChangeSettingsPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -55,7 +55,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          this.player.getRecipeBook().setBookSetting(packet.getBookType(), packet.isOpen(), packet.isFiltering());
      }
  
-@@ -1047,6 +1051,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1085,6 +1089,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleRenameItem(ServerboundRenameItemPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -63,7 +63,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          AbstractContainerMenu container = this.player.containerMenu;
  
          if (container instanceof AnvilMenu) {
-@@ -1069,6 +1074,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1107,6 +1112,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleSetBeaconPacket(ServerboundSetBeaconPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -71,7 +71,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          AbstractContainerMenu container = this.player.containerMenu;
  
          if (container instanceof BeaconMenu) {
-@@ -1184,6 +1190,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -1222,6 +1228,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleSelectTrade(ServerboundSelectTradePacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -79,7 +79,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          int i = packet.getItem();
          AbstractContainerMenu container = this.player.containerMenu;
  
-@@ -1931,6 +1938,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2011,6 +2018,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
      @Override
      public void handleUseItemOn(ServerboundUseItemOnPacket packet) {
@@ -87,7 +87,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
          if (this.player.isImmobile()) return; // CraftBukkit
          if (!this.checkLimit(packet.timestamp)) return; // Spigot - check limit
-@@ -1993,6 +2001,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2073,6 +2081,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
          if (this.player.isImmobile()) return; // CraftBukkit
          if (!this.checkLimit(packet.timestamp)) return; // Spigot - check limit
@@ -95,7 +95,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          this.ackBlockChangesUpTo(packet.getSequence());
          ServerLevel worldserver = this.player.getLevel();
          InteractionHand enumhand = packet.getHand();
-@@ -2194,6 +2203,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -2284,6 +2293,8 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
              this.player.getInventory().selected = packet.getSlot();
              this.player.resetLastActionTime();
@@ -104,7 +104,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          } else {
              ServerGamePacketListenerImpl.LOGGER.warn("{} tried to set an invalid carried item", this.player.getName().getString());
              this.disconnect("Invalid hotbar selection (Hacking?)", org.bukkit.event.player.PlayerKickEvent.Cause.ILLEGAL_ACTION); // CraftBukkit // Paper - kick event cause
-@@ -2927,6 +2938,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3020,6 +3031,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      public void handleContainerClose(ServerboundContainerClosePacket packet, InventoryCloseEvent.Reason reason) {
          // Paper end
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -112,7 +112,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
  
          if (this.player.isImmobile()) return; // CraftBukkit
          CraftEventFactory.handleInventoryCloseEvent(this.player, reason); // CraftBukkit // Paper
-@@ -2937,6 +2949,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3030,6 +3042,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleContainerClick(ServerboundContainerClickPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -120,7 +120,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          if (this.player.isImmobile()) return; // CraftBukkit
          this.player.resetLastActionTime();
          if (this.player.containerMenu.containerId == packet.getContainerId() && this.player.containerMenu.stillValid(this.player)) { // CraftBukkit
-@@ -3255,6 +3268,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3348,6 +3361,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
      @Override
      public void handlePlaceRecipe(ServerboundPlaceRecipePacket packet) {
@@ -128,7 +128,7 @@ index 483bdb79cc928c44560954723a41165a69fb4bf0..a8d3dbea1892a31c593f141cc7a3c24b
          // Paper start
          if (!org.bukkit.Bukkit.isPrimaryThread()) {
              if (recipeSpamPackets.addAndGet(io.papermc.paper.configuration.GlobalConfiguration.get().spamLimiter.recipeSpamIncrement) > io.papermc.paper.configuration.GlobalConfiguration.get().spamLimiter.recipeSpamLimit) {
-@@ -3285,6 +3299,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3378,6 +3392,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
      @Override
      public void handleContainerButtonClick(ServerboundContainerButtonClickPacket packet) {
          PacketUtils.ensureRunningOnSameThread(packet, this, this.player.getLevel());
@@ -149,7 +149,7 @@ index 87167f16fa9dedf19abefe38864498edb0c40a1d..8fb5f47a1ffeb248266e6bfa12a26a1b
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 3073b34a0e0281b6b0330721bb0440147de28511..86c7ef5d8b7854ff21a137cea0b795db92255ef6 100644
+index 1ae7ef3d94d4d3d8413a5419eeb9fadad89d2f8d..98e784fc5ba38979fea3ce188fbcb33ae02d4fcb 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -91,14 +91,7 @@ import net.minecraft.world.level.Explosion;
@@ -176,7 +176,7 @@ index 3073b34a0e0281b6b0330721bb0440147de28511..86c7ef5d8b7854ff21a137cea0b795db
  // CraftBukkit end
  
  public abstract class Entity implements Nameable, EntityAccess, CommandSource {
-@@ -1559,7 +1553,17 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -1561,7 +1555,17 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
                  for (int j = blockposition.getY(); j <= blockposition1.getY(); ++j) {
                      for (int k = blockposition.getZ(); k <= blockposition1.getZ(); ++k) {
                          blockposition_mutableblockposition.set(i, j, k);
@@ -257,7 +257,7 @@ index 004091f2026f3c58d9bce49f1b07f6441df8da8a..717b79e08152453b5df6dfc6f12e5af4
      }
  
 diff --git a/src/main/java/net/minecraft/world/item/ItemStack.java b/src/main/java/net/minecraft/world/item/ItemStack.java
-index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fabc361e0e 100644
+index 7222ff43de1b570458f2513fe1a44d97a09d0799..44d9ee00c2b5e5ece5ef317a97c0d4590f045652 100644
 --- a/src/main/java/net/minecraft/world/item/ItemStack.java
 +++ b/src/main/java/net/minecraft/world/item/ItemStack.java
 @@ -104,6 +104,7 @@ import org.bukkit.entity.Player;
@@ -268,7 +268,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
  // CraftBukkit end
  
  public final class ItemStack {
-@@ -150,6 +151,18 @@ public final class ItemStack {
+@@ -151,6 +152,18 @@ public final class ItemStack {
      private AdventureModeCheck adventureBreakCheck;
      @Nullable
      private AdventureModeCheck adventurePlaceCheck;
@@ -287,7 +287,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
  
      public Optional<TooltipComponent> getTooltipImage() {
          return this.getItem().getTooltipImage(this);
-@@ -270,6 +283,7 @@ public final class ItemStack {
+@@ -271,6 +284,7 @@ public final class ItemStack {
              this.setDamageValue(this.getDamageValue());
          }
  
@@ -295,7 +295,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      private ItemStack(CompoundTag nbt) {
-@@ -549,6 +563,8 @@ public final class ItemStack {
+@@ -562,6 +576,8 @@ public final class ItemStack {
  
      public void setDamageValue(int damage) {
          this.getOrCreateTag().putInt("Damage", Math.max(0, damage));
@@ -304,7 +304,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public int getMaxDamage() {
-@@ -818,6 +834,8 @@ public final class ItemStack {
+@@ -837,6 +853,8 @@ public final class ItemStack {
              if (this.tag.isEmpty()) {
                  this.tag = null;
              }
@@ -313,7 +313,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
          }
  
      }
-@@ -856,6 +874,7 @@ public final class ItemStack {
+@@ -875,6 +893,7 @@ public final class ItemStack {
              this.getItem().verifyTagAfterLoad(nbt);
          }
  
@@ -321,7 +321,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public Component getHoverName() {
-@@ -887,6 +906,8 @@ public final class ItemStack {
+@@ -906,6 +925,8 @@ public final class ItemStack {
              nbttagcompound.remove("Name");
          }
  
@@ -330,7 +330,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
          return this;
      }
  
-@@ -904,6 +925,8 @@ public final class ItemStack {
+@@ -923,6 +944,8 @@ public final class ItemStack {
              this.tag = null;
          }
  
@@ -339,7 +339,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public boolean hasCustomHoverName() {
-@@ -1093,6 +1116,8 @@ public final class ItemStack {
+@@ -1112,6 +1135,8 @@ public final class ItemStack {
          CompoundTag nbttagcompound = this.getOrCreateTag();
  
          nbttagcompound.putInt("HideFlags", nbttagcompound.getInt("HideFlags") | tooltipSection.getMask());
@@ -348,16 +348,16 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public static void appendEnchantmentNames(List<Component> tooltip, ListTag enchantments) {
-@@ -1142,6 +1167,8 @@ public final class ItemStack {
+@@ -1161,6 +1186,8 @@ public final class ItemStack {
  
-         nbttaglist.add(EnchantmentHelper.storeEnchantment(EnchantmentHelper.getEnchantmentId(enchantment), (byte) level));
+         nbttaglist.add(EnchantmentHelper.storeEnchantment(EnchantmentHelper.getEnchantmentId(enchantment), (org.purpurmc.purpur.PurpurConfig.clampEnchantLevels) ? (byte) level : (short) level)); // Purpur
          processEnchantOrder(this.tag); // Paper
 +
 +        markDirty(); // MultiPaper
      }
  
      public boolean isEnchanted() {
-@@ -1150,6 +1177,8 @@ public final class ItemStack {
+@@ -1175,6 +1202,8 @@ public final class ItemStack {
  
      public void addTagElement(String key, Tag element) {
          this.getOrCreateTag().put(key, element);
@@ -366,7 +366,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public boolean isFramed() {
-@@ -1182,6 +1211,8 @@ public final class ItemStack {
+@@ -1207,6 +1236,8 @@ public final class ItemStack {
          }
          // CraftBukkit end
          this.getOrCreateTag().putInt("RepairCost", repairCost);
@@ -375,7 +375,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
  
      public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
-@@ -1235,6 +1266,8 @@ public final class ItemStack {
+@@ -1260,6 +1291,8 @@ public final class ItemStack {
      public void setItem(Item item) {
          this.bukkitStack = null; // Paper
          this.item = item;
@@ -384,7 +384,7 @@ index 8450a22b0fc6e8dc5cad0f61ac52a82b3cd3791e..faa80a1e1113ceaba46788333f8404fa
      }
      // CraftBukkit end
  
-@@ -1287,6 +1320,8 @@ public final class ItemStack {
+@@ -1312,6 +1345,8 @@ public final class ItemStack {
      public void setCount(int count) {
          this.count = count;
          this.updateEmptyCacheFlag();

@@ -5,7 +5,7 @@ Subject: [PATCH] Allow external players to push minecarts
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/vehicle/AbstractMinecart.java b/src/main/java/net/minecraft/world/entity/vehicle/AbstractMinecart.java
-index eec7d7a5b558830111831792c42665724613af23..69c4af4f46f76769eec471d3010b3e603eb6bd34 100644
+index 36da85fe7ba6c6931e96bf4cf77cbe5f079299af..dac674b72f06e703f92e08ec8e9f5272c07fc3f8 100644
 --- a/src/main/java/net/minecraft/world/entity/vehicle/AbstractMinecart.java
 +++ b/src/main/java/net/minecraft/world/entity/vehicle/AbstractMinecart.java
 @@ -53,6 +53,7 @@ import org.bukkit.event.vehicle.VehicleDamageEvent;
@@ -16,7 +16,7 @@ index eec7d7a5b558830111831792c42665724613af23..69c4af4f46f76769eec471d3010b3e60
  // CraftBukkit end
  
  public abstract class AbstractMinecart extends Entity {
-@@ -488,7 +489,28 @@ public abstract class AbstractMinecart extends Entity {
+@@ -496,7 +497,28 @@ public abstract class AbstractMinecart extends Entity {
  
              this.firstTick = false;
          }

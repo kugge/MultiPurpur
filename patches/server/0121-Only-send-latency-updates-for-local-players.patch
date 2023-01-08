@@ -7,10 +7,10 @@ External players' latency isn't synced, thus making it pointless
 and wasting resources to send latency updates for those players
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index d9a05171c9b786a2851448b09a91652d8092feec..1f478fd58221bf8832c461120c2a45367812f6c1 100644
+index e76ea0919a9647e4af8f953bfc98e0273cb7235f..3e86442d5c51d157c8c9aaeb4f00f803c4549649 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -1025,7 +1025,8 @@ public abstract class PlayerList {
+@@ -1030,7 +1030,8 @@ public abstract class PlayerList {
              for (int i = 0; i < this.players.size(); ++i) {
                  final ServerPlayer target = (ServerPlayer) this.players.get(i);
  

@@ -6,10 +6,10 @@ Subject: [PATCH] Revert to using a plugin jar's parent file for storing plugin
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-index bf93183aa76af005d5daf8cf533f908d535166e8..4f3f4d80e01f04648630a67681f0882906583309 100644
+index d7ac5d5bb6180f97706be9c5ef25956f244bc376..74f4cbd2a6d73e7365894445c5028a7685780992 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPluginLoader.java
-@@ -95,7 +95,7 @@ public final class JavaPluginLoader implements PluginLoader {
+@@ -96,7 +96,7 @@ public final class JavaPluginLoader implements PluginLoader {
              throw new InvalidPluginException(ex);
          }
  

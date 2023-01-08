@@ -5,10 +5,10 @@ Subject: [PATCH] Load chunks when entities go through an end portal
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 95adf096e5c1042fabe9a604968b6d55b4ea44fa..fc37e7067df128391a071263928485f01e4b6e2d 100644
+index 464c79a377d1b35b2c127e30678370ae082ab79b..93a4c87dde7cd79b3a6cafd2a24550e9b31afea9 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
-@@ -3579,6 +3579,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -3608,6 +3608,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
                  Entity entity = this.getType().create(worldserver);
  
                  if (entity != null) {

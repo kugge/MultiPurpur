@@ -5,10 +5,10 @@ Subject: [PATCH] Sync potion effects
 
 
 diff --git a/src/main/java/net/minecraft/world/effect/MobEffectInstance.java b/src/main/java/net/minecraft/world/effect/MobEffectInstance.java
-index 038ba61e4845a4a71bb78ba388ed249d19529b78..af6922e0c3f680bb4ecc3413a45e3388ae9bf007 100644
+index 6d5080ba244daf3b93d61d28ee0b88eb56bac723..3c5833e50a2acdf9da61fb8cb1a2d418a2d8d4ce 100644
 --- a/src/main/java/net/minecraft/world/effect/MobEffectInstance.java
 +++ b/src/main/java/net/minecraft/world/effect/MobEffectInstance.java
-@@ -92,7 +92,7 @@ public class MobEffectInstance implements Comparable<MobEffectInstance> {
+@@ -114,7 +114,7 @@ public class MobEffectInstance implements Comparable<MobEffectInstance> {
              this.amplifier = that.amplifier;
              this.duration = that.duration;
              bl = true;
@@ -18,7 +18,7 @@ index 038ba61e4845a4a71bb78ba388ed249d19529b78..af6922e0c3f680bb4ecc3413a45e3388
                  this.duration = that.duration;
                  bl = true;
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index 3553d6d27778a571f94d174386465ad8b3ea804d..585f00c6f41b3392412f2fc8e9197c0a2919a453 100644
+index 30079f4a8128adebb0995402de5800c9e96477c3..ec3031f5677488b87008bd7e7ab90ae63b5108f3 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -143,6 +143,7 @@ import org.bukkit.event.entity.EntityTeleportEvent;
@@ -29,7 +29,7 @@ index 3553d6d27778a571f94d174386465ad8b3ea804d..585f00c6f41b3392412f2fc8e9197c0a
  import puregero.multipaper.MultiPaperEntityInteractHandler;
  import puregero.multipaper.externalserverprotocol.EntityUpdatePacket;
  import puregero.multipaper.externalserverprotocol.HurtEntityPacket;
-@@ -1240,29 +1241,32 @@ public abstract class LivingEntity extends Entity {
+@@ -1276,29 +1277,32 @@ public abstract class LivingEntity extends Entity {
  
      protected void onEffectAdded(MobEffectInstance effect, @Nullable Entity source) {
          this.effectsDirty = true;

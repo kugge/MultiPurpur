@@ -5,7 +5,7 @@ Subject: [PATCH] Sync experience
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index edb49e08f91021345f3928b8f6b717bcf988ac54..aaf77e08d0d9f391796150ecfc74147478cb5ff8 100644
+index fd61c88755fd4f100bf60126e277eff9ffb6d601..1946832c8c599919e245ce92515cc8860e8bc273 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -173,10 +173,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
@@ -20,7 +20,7 @@ index edb49e08f91021345f3928b8f6b717bcf988ac54..aaf77e08d0d9f391796150ecfc741474
  // CraftBukkit end
  
  public class ServerPlayer extends Player {
-@@ -627,6 +624,20 @@ public class ServerPlayer extends Player {
+@@ -639,6 +636,20 @@ public class ServerPlayer extends Player {
          this.lastSentExp = -1;
      }
  

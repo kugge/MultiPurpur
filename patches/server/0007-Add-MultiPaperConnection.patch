@@ -5,7 +5,7 @@ Subject: [PATCH] Add MultiPaperConnection
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 9cd4585c05843a292c981f0c8fd219c4f1c75388..90e7d63c6ddd15adb8df2158837e17eecf616c60 100644
+index 72b59dde0f8ad83ba7dd68126e288385b77977e0..eee356b3bdeebb9c813c0f2a2a88313d76e9dfb7 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
 @@ -7,6 +7,7 @@ plugins {
@@ -13,7 +13,7 @@ index 9cd4585c05843a292c981f0c8fd219c4f1c75388..90e7d63c6ddd15adb8df2158837e17ee
  
  dependencies {
 +    implementation(project(":MultiPaper-MasterMessagingProtocol")) // MultiPaper
-     implementation(project(":MultiPaper-API")) // MultiPaper // Pufferfish // Paper
+     implementation(project(":MultiPaper-API")) // MultiPaper // Purpur
      // Pufferfish start
      implementation("io.papermc.paper:paper-mojangapi:1.19.3-R0.1-SNAPSHOT") {
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
@@ -37,7 +37,7 @@ index 3130c4f9a4ba239d95fc3e73f18e5ae717b19108..7e788da082bc32cb1db9dd551ed9b8bd
              Bootstrap.bootStrap();
              Bootstrap.validate();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 16fa855416987c9191c94ba7e0dcca5ce31c8e26..288ca4176858f42ec6cf14eb55a9f0457da50c52 100644
+index 2ae23e4708c9190d07c384b743b32770edf5496d..4de4fdd8e42b2ae07ceca0f9159dd59fb8e00aec 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -193,6 +193,7 @@ import org.bukkit.event.server.ServerLoadEvent;

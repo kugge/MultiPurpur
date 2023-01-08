@@ -5,7 +5,7 @@ Subject: [PATCH] Ensure Villager getOffers is run on the main thread
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/npc/AbstractVillager.java b/src/main/java/net/minecraft/world/entity/npc/AbstractVillager.java
-index ca96b893e22de3ae7c11d5cded51edf70bdcb6f2..81dc436bab6402cde1d3b72a8ea4388b273b70a1 100644
+index d4ab27de59e9c533789f062e74ceb453483e2e39..aadf91a6a8edda9d3ec22d8ba844b388f3758aa7 100644
 --- a/src/main/java/net/minecraft/world/entity/npc/AbstractVillager.java
 +++ b/src/main/java/net/minecraft/world/entity/npc/AbstractVillager.java
 @@ -4,6 +4,8 @@ import com.google.common.collect.Sets;
@@ -25,7 +25,7 @@ index ca96b893e22de3ae7c11d5cded51edf70bdcb6f2..81dc436bab6402cde1d3b72a8ea4388b
  // CraftBukkit end
  
  public abstract class AbstractVillager extends AgeableMob implements InventoryCarrier, Npc, Merchant {
-@@ -125,6 +128,7 @@ public abstract class AbstractVillager extends AgeableMob implements InventoryCa
+@@ -126,6 +129,7 @@ public abstract class AbstractVillager extends AgeableMob implements InventoryCa
      @Override
      public MerchantOffers getOffers() {
          if (this.offers == null) {

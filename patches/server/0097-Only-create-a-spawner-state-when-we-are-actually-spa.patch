@@ -6,11 +6,11 @@ Subject: [PATCH] Only create a spawner state when we are actually spawning
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerChunkCache.java b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
-index df272ee0407bb398dc29ca335f2a152456298ce5..97f2ac1f03a25c9b6adfe0e6c2186dbab90637d2 100644
+index 5308ca8691a2adecb35ea6f2b316038df38e64f5..3dcb827f374b9457b283f0ebbf5ef3631dd960dc 100644
 --- a/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 +++ b/src/main/java/net/minecraft/server/level/ServerChunkCache.java
 @@ -718,7 +718,9 @@ public class ServerChunkCache extends ChunkSource {
-             this.level.timings.countNaturalMobs.startTiming(); // Paper - timings
+             //this.level.timings.countNaturalMobs.startTiming(); // Paper - timings // Purpur
              int l = this.distanceManager.getNaturalSpawnChunkCount();
              // Paper start - per player mob spawning
 -            NaturalSpawner.SpawnState spawnercreature_d; // moved down
@@ -21,17 +21,17 @@ index df272ee0407bb398dc29ca335f2a152456298ce5..97f2ac1f03a25c9b6adfe0e6c2186dba
                  // Pufferfish start - moved down when async processing
                  if (!gg.pufferfish.pufferfish.PufferfishConfig.enableAsyncMobSpawning) {
 @@ -739,6 +741,7 @@ public class ServerChunkCache extends ChunkSource {
-             this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings
+             //this.level.timings.countNaturalMobs.stopTiming(); // Paper - timings // Purpur
  
              //this.lastSpawnState = spawnercreature_d; // Pufferfish - this is managed asynchronously
 +
-             gameprofilerfiller.popPush("filteringLoadedChunks");
+             //gameprofilerfiller.popPush("filteringLoadedChunks"); // Purpur
              // Paper - moved down
-             this.level.timings.chunkTicks.startTiming(); // Paper
+             //this.level.timings.chunkTicks.startTiming(); // Paper // Purpur
 @@ -746,7 +749,7 @@ public class ServerChunkCache extends ChunkSource {
              // Paper - moved down
  
-             gameprofilerfiller.popPush("spawnAndTick");
+             //gameprofilerfiller.popPush("spawnAndTick"); // Purpur
 -            boolean flag2 = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit
 +            // boolean flag2 = this.level.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING) && !this.level.players().isEmpty(); // CraftBukkit // Multipaper - moved up
  

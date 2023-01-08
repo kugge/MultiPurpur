@@ -104,7 +104,7 @@ index 08b18428e867baf14f551beb72e3875b0c420639..b1031bc26aeb1607d312e70e673a9766
      }
  
 diff --git a/src/main/java/net/minecraft/world/entity/raid/Raids.java b/src/main/java/net/minecraft/world/entity/raid/Raids.java
-index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b452be618 100644
+index 0670775c2de33e69c75644e5d2ff19db08444040..76c91f3ba9c841819a064e130338bddd24b0ff77 100644
 --- a/src/main/java/net/minecraft/world/entity/raid/Raids.java
 +++ b/src/main/java/net/minecraft/world/entity/raid/Raids.java
 @@ -4,7 +4,10 @@ import com.google.common.collect.Maps;
@@ -118,7 +118,7 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
  import net.minecraft.advancements.CriteriaTriggers;
  import net.minecraft.core.BlockPos;
  import net.minecraft.core.Holder;
-@@ -19,16 +22,19 @@ import net.minecraft.tags.PoiTypeTags;
+@@ -19,17 +22,20 @@ import net.minecraft.tags.PoiTypeTags;
  import net.minecraft.world.effect.MobEffects;
  import net.minecraft.world.entity.ai.village.poi.PoiManager;
  import net.minecraft.world.entity.ai.village.poi.PoiRecord;
@@ -133,12 +133,13 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
  public class Raids extends SavedData {
  
      private static final String RAID_FILE_ID = "raids";
+     public final Map<java.util.UUID, Integer> playerCooldowns = Maps.newHashMap();
      public final Map<Integer, Raid> raidMap = Maps.newHashMap();
 +    public final Long2IntOpenHashMap chunkToRaidIdMap = new Long2IntOpenHashMap(); // MultiPaper
      private final ServerLevel level;
      private int nextAvailableID;
      private int tick;
-@@ -43,6 +49,16 @@ public class Raids extends SavedData {
+@@ -44,6 +50,16 @@ public class Raids extends SavedData {
          return (Raid) this.raidMap.get(id);
      }
  
@@ -154,9 +155,9 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
 +
      public void tick() {
          ++this.tick;
-         Iterator iterator = this.raidMap.values().iterator();
-@@ -136,6 +152,8 @@ public class Raids extends SavedData {
-                     }
+         // Purpur start
+@@ -150,6 +166,8 @@ public class Raids extends SavedData {
+                     if (level.purpurConfig.raidCooldownSeconds != 0) playerCooldowns.put(player.getUUID(), level.purpurConfig.raidCooldownSeconds); // Purpur
  
                      if (!this.raidMap.containsKey(raid.getId())) {
 +                        RaidUpdatePacket.broadcastUpdate(raid); // MultiPaper
@@ -164,7 +165,7 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
                          this.raidMap.put(raid.getId(), raid);
                      }
                      // CraftBukkit end
-@@ -154,6 +172,12 @@ public class Raids extends SavedData {
+@@ -168,6 +186,12 @@ public class Raids extends SavedData {
      }
  
      private Raid getOrCreateRaid(ServerLevel world, BlockPos pos) {
@@ -177,7 +178,7 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
          Raid raid = world.getRaidAt(pos);
  
          return raid != null ? raid : new Raid(this.getUniqueId(), world, pos);
-@@ -171,6 +195,7 @@ public class Raids extends SavedData {
+@@ -185,6 +209,7 @@ public class Raids extends SavedData {
              Raid raid = new Raid(world, nbttagcompound1);
  
              persistentraid.raidMap.put(raid.getId(), raid);
@@ -185,7 +186,7 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
          }
  
          return persistentraid;
-@@ -200,6 +225,7 @@ public class Raids extends SavedData {
+@@ -214,6 +239,7 @@ public class Raids extends SavedData {
      }
  
      private int getUniqueId() {
@@ -193,7 +194,7 @@ index feb89eb69994bdd1d2f95d2b9992e69251b2bee7..8fa22d6c49830034b0c502ff3697fd3b
          return ++this.nextAvailableID;
      }
  
-@@ -213,7 +239,7 @@ public class Raids extends SavedData {
+@@ -227,7 +253,7 @@ public class Raids extends SavedData {
              Raid raid1 = (Raid) iterator.next();
              double d1 = raid1.getCenter().distSqr(pos);
  

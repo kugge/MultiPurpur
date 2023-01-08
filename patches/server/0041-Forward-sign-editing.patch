@@ -5,7 +5,7 @@ Subject: [PATCH] Forward sign editing
 
 
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 276f27918abe8e0474628c6e3ef333e931ea4152..ca8d814b964f339c8a4fe6f1403b38f9e393d35e 100644
+index 4e958ed025dd45961a13d6a6764552195068ebcd..0730837cd23bfe3bcf0b963c82516ce7abf2e781 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -247,6 +247,7 @@ import puregero.multipaper.MultiPaperAckBlockChangesHandler;
@@ -16,7 +16,7 @@ index 276f27918abe8e0474628c6e3ef333e931ea4152..ca8d814b964f339c8a4fe6f1403b38f9
  import puregero.multipaper.externalserverprotocol.PlayerActionPacket;
  import puregero.multipaper.externalserverprotocol.PlayerRemovePacket;
  // CraftBukkit end
-@@ -3403,6 +3404,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
+@@ -3496,6 +3497,7 @@ public class ServerGamePacketListenerImpl implements ServerPlayerConnection, Tic
  
      @Override
      public void handleSignUpdate(ServerboundSignUpdatePacket packet) {

@@ -5,7 +5,7 @@ Subject: [PATCH] Sync entity ids
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 485a17a87fe3bfa5d22cf834c31005ba0c1671c4..34ca64a6bfab32347d3c2e223d2c32bf748a0d78 100644
+index b20ad067f0891c7e15f7555e346644581a626cd5..1e1af8a944bb33237bf36380971a62a46a54eadf 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
 @@ -247,7 +247,7 @@ public class ServerPlayer extends Player {
@@ -25,9 +25,9 @@ index 485a17a87fe3bfa5d22cf834c31005ba0c1671c4..34ca64a6bfab32347d3c2e223d2c32bf
 +    public com.destroystokyo.paper.util.misc.PooledLinkedHashSets.PooledObjectLinkedOpenHashSet<ServerPlayer> cachedSingleHashSet; // Paper // MultiPaper - make not final
      public PlayerNaturallySpawnCreaturesEvent playerNaturallySpawnedEvent; // Paper
      public org.bukkit.event.player.PlayerQuitEvent.QuitReason quitReason = null; // Paper - there are a lot of changes to do if we change all methods leading to the event
- 
+     public boolean purpurClient = false; // Purpur
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 4497d16e4a7f1fb3a4eb58ba47fbbfb2a0d4ed51..4634f3d356d3d58319fed1f66c9182e61db230e6 100644
+index 4e0992664fa8112bf3f09d48e4a60d8cb8096dbf..6a8f0f8489e3572e0263030d49c6e16dcbdd8fbf 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -155,6 +155,8 @@ import puregero.multipaper.ExternalServer;
@@ -39,7 +39,7 @@ index 4497d16e4a7f1fb3a4eb58ba47fbbfb2a0d4ed51..4634f3d356d3d58319fed1f66c9182e6
  import puregero.multipaper.externalserverprotocol.EntityRemovePacket;
  import puregero.multipaper.externalserverprotocol.EntityUpdateNBTPacket;
  import puregero.multipaper.externalserverprotocol.EntityUpdateWithDependenciesPacket;
-@@ -579,7 +581,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -580,7 +582,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
      // Paper end - make end portalling safe
  
      public Entity(EntityType<?> type, Level world) {
@@ -48,7 +48,7 @@ index 4497d16e4a7f1fb3a4eb58ba47fbbfb2a0d4ed51..4634f3d356d3d58319fed1f66c9182e6
          this.passengers = ImmutableList.of();
          this.deltaMovement = Vec3.ZERO;
          this.bb = Entity.INITIAL_AABB;
-@@ -2280,6 +2282,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -2282,6 +2284,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
  
      public CompoundTag saveWithoutId(CompoundTag nbt) {
          try {
@@ -56,7 +56,7 @@ index 4497d16e4a7f1fb3a4eb58ba47fbbfb2a0d4ed51..4634f3d356d3d58319fed1f66c9182e6
              if (this.vehicle != null) {
                  nbt.put("Pos", this.newDoubleList(this.vehicle.getX(), this.getY(), this.vehicle.getZ()));
              } else {
-@@ -2383,9 +2386,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -2385,9 +2388,11 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
                      Entity entity = (Entity) iterator.next();
                      CompoundTag nbttagcompound1 = new CompoundTag();
  
@@ -68,7 +68,7 @@ index 4497d16e4a7f1fb3a4eb58ba47fbbfb2a0d4ed51..4634f3d356d3d58319fed1f66c9182e6
                  }
  
                  if (!nbttaglist.isEmpty()) {
-@@ -2432,6 +2437,18 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -2439,6 +2444,18 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
  
      public void load(CompoundTag nbt) {
          try {

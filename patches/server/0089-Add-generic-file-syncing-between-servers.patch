@@ -5,18 +5,17 @@ Subject: [PATCH] Add generic file syncing between servers
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 4479ecc906d081532d79bf0734e06bf560ba4ea3..65eb822ff9df7094289ba490f5aeb18b06b48e76 100644
+index a3052738069ccdd26e6c4ebf6ab6259f6e1bcbe7..f9f7206bc76dfdb17a8544f5af140e773bbac616 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -53,6 +53,8 @@ dependencies {
+@@ -56,6 +56,7 @@ dependencies {
          exclude(group="org.yaml", module="snakeyaml")
      }
      // Pufferfish end
 +    implementation("io.methvin:directory-watcher:0.15.0") // MultiPaper
-+
-     implementation("com.github.technove:Flare:34637f3f87") // Pufferfish - flare
  
      testImplementation("io.github.classgraph:classgraph:4.8.47") // Paper - mob goal test
+     testImplementation("junit:junit:4.13.2")
 diff --git a/src/main/java/net/minecraft/server/Main.java b/src/main/java/net/minecraft/server/Main.java
 index 7e788da082bc32cb1db9dd551ed9b8bdceef4281..b98f198974b1d6d66a9f96e722a126108408382c 100644
 --- a/src/main/java/net/minecraft/server/Main.java
@@ -39,7 +38,7 @@ index 7e788da082bc32cb1db9dd551ed9b8bdceef4281..b98f198974b1d6d66a9f96e722a12610
              Bootstrap.bootStrap();
              Bootstrap.validate();
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 5d1ea36064c40501d487c2585670961bcc9518d9..69f88e012798dca8c3169548967d8708f999ec96 100644
+index 317d48e521920555e37e1e958c6942646aa6d3b8..f81ac26223d9ac910dc2429ca0e9d3e20859338a 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
 @@ -195,6 +195,7 @@ import org.bukkit.event.server.ServerLoadEvent;
@@ -50,7 +49,7 @@ index 5d1ea36064c40501d487c2585670961bcc9518d9..69f88e012798dca8c3169548967d8708
  import puregero.multipaper.externalserverprotocol.DifficultyUpdatePacket;
  
  public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTask> implements CommandSource, AutoCloseable {
-@@ -996,6 +997,8 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1007,6 +1008,8 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          // Paper start - move final shutdown items here
          LOGGER.info("Flushing Chunk IO");
          io.papermc.paper.chunk.system.io.RegionFileIOThread.close(true); // Paper // Paper - rewrite chunk system

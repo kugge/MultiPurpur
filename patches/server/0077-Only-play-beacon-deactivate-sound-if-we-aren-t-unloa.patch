@@ -6,10 +6,10 @@ Subject: [PATCH] Only play beacon deactivate sound if we aren't unloading the
 
 
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
-index 928625b5ab054ffa412be8a438f58291cc7a3cc0..1e7d14a021e870ae0126cd68a09ecfdcad2f203f 100644
+index c49175dcb7ca4469f729d3afb305fca42da82bcf..f03383f0bbb402cf6c15f950ef6fee5fe1e26757 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
-@@ -282,6 +282,7 @@ public class BeaconBlockEntity extends BlockEntity implements MenuProvider, Name
+@@ -296,6 +296,7 @@ public class BeaconBlockEntity extends BlockEntity implements MenuProvider, Name
          org.bukkit.block.Block block = org.bukkit.craftbukkit.block.CraftBlock.at(level, worldPosition);
          new io.papermc.paper.event.block.BeaconDeactivatedEvent(block).callEvent();
          // Paper end

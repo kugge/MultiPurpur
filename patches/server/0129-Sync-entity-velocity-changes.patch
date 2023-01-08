@@ -5,7 +5,7 @@ Subject: [PATCH] Sync entity velocity changes
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/Entity.java b/src/main/java/net/minecraft/world/entity/Entity.java
-index 4634f3d356d3d58319fed1f66c9182e61db230e6..312f9c79fbb258f75162752e32673bc276a0a225 100644
+index 6a8f0f8489e3572e0263030d49c6e16dcbdd8fbf..8bf2d99247302f55dbdc721356dd4f688c145b45 100644
 --- a/src/main/java/net/minecraft/world/entity/Entity.java
 +++ b/src/main/java/net/minecraft/world/entity/Entity.java
 @@ -157,6 +157,7 @@ import puregero.multipaper.MultiPaper;
@@ -16,7 +16,7 @@ index 4634f3d356d3d58319fed1f66c9182e61db230e6..312f9c79fbb258f75162752e32673bc2
  import puregero.multipaper.externalserverprotocol.EntityRemovePacket;
  import puregero.multipaper.externalserverprotocol.EntityUpdateNBTPacket;
  import puregero.multipaper.externalserverprotocol.EntityUpdateWithDependenciesPacket;
-@@ -4466,6 +4467,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
+@@ -4515,6 +4516,7 @@ public abstract class Entity implements Nameable, EntityAccess, CommandSource {
  
      public void addDeltaMovement(Vec3 velocity) {
          this.deltaMovement = this.deltaMovement.add(velocity);
@@ -25,7 +25,7 @@ index 4634f3d356d3d58319fed1f66c9182e61db230e6..312f9c79fbb258f75162752e32673bc2
  
      public void setDeltaMovement(double x, double y, double z) {
 diff --git a/src/main/java/net/minecraft/world/level/Explosion.java b/src/main/java/net/minecraft/world/level/Explosion.java
-index a213f4098859858a73ddd601bbe8c7511972e0d5..5dc9782969dd8089da1401fba5773b84c23b79b4 100644
+index c0d39afe5b80159ed9aaca4ddd4763d707882f2e..f41d5b28c1418b88f3b6d9fe146aef05587ac6d8 100644
 --- a/src/main/java/net/minecraft/world/level/Explosion.java
 +++ b/src/main/java/net/minecraft/world/level/Explosion.java
 @@ -270,7 +270,7 @@ public class Explosion {

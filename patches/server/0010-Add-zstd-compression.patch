@@ -5,10 +5,10 @@ Subject: [PATCH] Add zstd compression
 
 
 diff --git a/build.gradle.kts b/build.gradle.kts
-index 90e7d63c6ddd15adb8df2158837e17eecf616c60..4479ecc906d081532d79bf0734e06bf560ba4ea3 100644
+index eee356b3bdeebb9c813c0f2a2a88313d76e9dfb7..a3052738069ccdd26e6c4ebf6ab6259f6e1bcbe7 100644
 --- a/build.gradle.kts
 +++ b/build.gradle.kts
-@@ -45,6 +45,7 @@ dependencies {
+@@ -48,6 +48,7 @@ dependencies {
      runtimeOnly("org.apache.maven:maven-resolver-provider:3.8.5")
      runtimeOnly("org.apache.maven.resolver:maven-resolver-connector-basic:1.7.3")
      runtimeOnly("org.apache.maven.resolver:maven-resolver-transport-http:1.7.3")

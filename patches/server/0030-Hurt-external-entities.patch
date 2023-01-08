@@ -5,7 +5,7 @@ Subject: [PATCH] Hurt external entities
 
 
 diff --git a/src/main/java/net/minecraft/world/entity/LivingEntity.java b/src/main/java/net/minecraft/world/entity/LivingEntity.java
-index c704ecbc22cd5be92cdaf5a704c9fadb71f8bb94..3553d6d27778a571f94d174386465ad8b3ea804d 100644
+index 4357cf50eee48f8d77588ca9cd16d178ed52b0da..30079f4a8128adebb0995402de5800c9e96477c3 100644
 --- a/src/main/java/net/minecraft/world/entity/LivingEntity.java
 +++ b/src/main/java/net/minecraft/world/entity/LivingEntity.java
 @@ -141,8 +141,11 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
@@ -20,7 +20,7 @@ index c704ecbc22cd5be92cdaf5a704c9fadb71f8bb94..3553d6d27778a571f94d174386465ad8
  // CraftBukkit end
  
  
-@@ -1339,6 +1342,15 @@ public abstract class LivingEntity extends Entity {
+@@ -1375,6 +1378,15 @@ public abstract class LivingEntity extends Entity {
  
      @Override
      public boolean hurt(DamageSource source, float amount) {

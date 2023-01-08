@@ -5,13 +5,13 @@ Subject: [PATCH] Sync enderchests
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerPlayer.java b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-index 00220fa5665f247639078faeb5a07cc788e423bd..f983b22bbb8213bb2a4d3e15a94e1d3b55e97f23 100644
+index 65c55890f030a54c06d03a812dbef9d4d882f42c..af0a4aa60d42464b95a5aa7819dc74a4a5bd28fe 100644
 --- a/src/main/java/net/minecraft/server/level/ServerPlayer.java
 +++ b/src/main/java/net/minecraft/server/level/ServerPlayer.java
-@@ -371,6 +371,7 @@ public class ServerPlayer extends Player {
-         this.bukkitPickUpLoot = true;
+@@ -377,6 +377,7 @@ public class ServerPlayer extends Player {
          this.maxHealthCache = this.getMaxHealth();
          this.cachedSingleMobDistanceMap = new com.destroystokyo.paper.util.PooledHashSets.PooledObjectLinkedOpenHashSet<>(this); // Paper
+         this.spawnInvulnerableTime = world.purpurConfig.playerSpawnInvulnerableTicks; // Purpur
 +        enderChestInventory.addListener(new MultiPaperEnderChestHandler(this)); // MultiPaper
      }
  

@@ -5,7 +5,7 @@ Subject: [PATCH] MultiPaper Metrics
 
 
 diff --git a/src/main/java/com/destroystokyo/paper/Metrics.java b/src/main/java/com/destroystokyo/paper/Metrics.java
-index 692c962193cf9fcc6801fc93f3220bdc673d527b..5c0a58e934503e6255547f7e121d3a00812ac9c7 100644
+index 9713263c3bd34ab8a3bfc0a8797ba0b1b88ed733..95ac9317bc316d352c3873e6e5b0b434d10eb71d 100644
 --- a/src/main/java/com/destroystokyo/paper/Metrics.java
 +++ b/src/main/java/com/destroystokyo/paper/Metrics.java
 @@ -3,6 +3,7 @@ package com.destroystokyo.paper;
@@ -20,15 +20,15 @@ index 692c962193cf9fcc6801fc93f3220bdc673d527b..5c0a58e934503e6255547f7e121d3a00
              boolean logFailedRequests = config.getBoolean("logFailedRequests", false);
              // Only start Metrics, if it's enabled in the config
              if (config.getBoolean("enabled", true)) {
--                Metrics metrics = new Metrics("Pufferfish", serverUUID, logFailedRequests, Bukkit.getLogger()); // Pufferfish
-+                Metrics metrics = new Metrics("MultiPaper", serverUUID, logFailedRequests, Bukkit.getLogger()); // Pufferfish // MultiPaper
+-                Metrics metrics = new Metrics("Purpur", serverUUID, logFailedRequests, Bukkit.getLogger()); // Purpur
++                Metrics metrics = new Metrics("MultiPaper", serverUUID, logFailedRequests, Bukkit.getLogger()); // Purpur // MultiPaper
  
                  metrics.addCustomChart(new Metrics.SimplePie("minecraft_version", () -> {
                      String minecraftVersion = Bukkit.getVersion();
-@@ -612,6 +613,7 @@ public class Metrics {
-                     paperVersion = "unknown";
-                 }
-                 metrics.addCustomChart(new Metrics.SimplePie("pufferfish_version", () -> paperVersion)); // Pufferfish
+@@ -604,6 +605,7 @@ public class Metrics {
+                 metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
+                 metrics.addCustomChart(new Metrics.SimplePie("online_mode", () -> Bukkit.getOnlineMode() ? "online" : (io.papermc.paper.configuration.GlobalConfiguration.get().proxies.isProxyOnlineMode() ? "bungee" : "offline"))); // Purpur
+                 metrics.addCustomChart(new Metrics.SimplePie("purpur_version", () -> (org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() != null) ? org.bukkit.craftbukkit.Main.class.getPackage().getImplementationVersion() : "unknown")); // Purpur
 +                metrics.addCustomChart(new Metrics.SimplePie("multipaper_version", () -> (CraftServer.class.getPackage().getImplementationVersion() != null) ? CraftServer.class.getPackage().getImplementationVersion() : "unknown")); // MultiPaper
  
                  metrics.addCustomChart(new Metrics.DrilldownPie("java_version", () -> {

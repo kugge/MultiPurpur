@@ -5,16 +5,16 @@ Subject: [PATCH] Add sendTickTime
 
 
 diff --git a/src/main/java/net/minecraft/server/MinecraftServer.java b/src/main/java/net/minecraft/server/MinecraftServer.java
-index 288ca4176858f42ec6cf14eb55a9f0457da50c52..8522c10ca96d9a8862753ebcc9a850444b40d12f 100644
+index 4de4fdd8e42b2ae07ceca0f9159dd59fb8e00aec..b46aa3d3bc49c907938ebadfacf7349c7b3e2bbf 100644
 --- a/src/main/java/net/minecraft/server/MinecraftServer.java
 +++ b/src/main/java/net/minecraft/server/MinecraftServer.java
-@@ -1465,6 +1465,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
+@@ -1490,6 +1490,7 @@ public abstract class MinecraftServer extends ReentrantBlockableEventLoop<TickTa
          tickTimes60s.add(this.tickCount, l);
          // Paper end
  
 +        MultiPaper.sendTickTime(i1 - i, recentTps[0]); // MultiPaper
          this.frameTimer.logFrameDuration(i1 - i);
-         this.profiler.pop();
+         //this.profiler.pop(); // Purpur
          org.spigotmc.WatchdogThread.tick(); // Spigot
 diff --git a/src/main/java/puregero/multipaper/MultiPaper.java b/src/main/java/puregero/multipaper/MultiPaper.java
 index d9fa811b2a0b5f8402ae0e811b09ddbd8509e8ad..19948c5a87dd5f0da3aef064dbb6448d306395b6 100644

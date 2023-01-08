@@ -5,7 +5,7 @@ Subject: [PATCH] Add useLocalPlayerCountForServerIsFullKick
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 130b8d6b78b1cef23e3ac47ff10b5ae2d52abc25..d9a05171c9b786a2851448b09a91652d8092feec 100644
+index db1ff07791b09f4fc383bba0229dec460200634c..e76ea0919a9647e4af8f953bfc98e0273cb7235f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,6 +102,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
@@ -16,13 +16,13 @@ index 130b8d6b78b1cef23e3ac47ff10b5ae2d52abc25..d9a05171c9b786a2851448b09a91652d
  import puregero.multipaper.externalserverprotocol.*;
  // CraftBukkit end
  
-@@ -727,7 +728,8 @@ public abstract class PlayerList {
+@@ -730,7 +731,8 @@ public abstract class PlayerList {
              event.disallow(PlayerLoginEvent.Result.KICK_BANNED, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          } else {
              // return this.players.size() >= this.maxPlayers && !this.canBypassPlayerLimit(gameprofile) ? IChatBaseComponent.translatable("multiplayer.disconnect.server_full") : null;
--            if (this.players.size() >= this.maxPlayers && !this.canBypassPlayerLimit(gameprofile)) {
+-            if (this.players.size() >= this.maxPlayers && !(player.hasPermission("purpur.joinfullserver") || this.canBypassPlayerLimit(gameprofile))) { // Purpur
 +            boolean isFull = MultiPaperConfiguration.get().syncSettings.useLocalPlayerCountForServerIsFullKick ? this.localPlayers.size() >= this.maxPlayers : this.players.size() >= this.maxPlayers; // MultiPaper - add isFull
-+            if (isFull && !this.canBypassPlayerLimit(gameprofile)) { // MultiPaper - add isFull
++            if (isFull && this.players.size() >= this.maxPlayers && !(player.hasPermission("purpur.joinfullserver") || this.canBypassPlayerLimit(gameprofile))) { // Purpur // MultiPaper
                  event.disallow(PlayerLoginEvent.Result.KICK_FULL, net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().deserialize(org.spigotmc.SpigotConfig.serverFullMessage)); // Spigot // Paper - Adventure
              }
          }

@@ -5,7 +5,7 @@ Subject: [PATCH] Sync game events
 
 
 diff --git a/src/main/java/net/minecraft/server/level/ServerLevel.java b/src/main/java/net/minecraft/server/level/ServerLevel.java
-index 8de4d199d29ce0d1dad075624c09dc864fa715a5..1f003c354cf77b22120ac256f5d37dbb106dfe05 100644
+index 2b34d85af2f23078e2eba4a4974598b4674eee16..f40e4f2000d197a5d083a41a9628f0ffc6a80862 100644
 --- a/src/main/java/net/minecraft/server/level/ServerLevel.java
 +++ b/src/main/java/net/minecraft/server/level/ServerLevel.java
 @@ -180,6 +180,7 @@ import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet; // Paper
@@ -16,7 +16,7 @@ index 8de4d199d29ce0d1dad075624c09dc864fa715a5..1f003c354cf77b22120ac256f5d37dbb
  import puregero.multipaper.MultiPaperInactiveTracker;
  import puregero.multipaper.externalserverprotocol.SpawnUpdatePacket;
  import puregero.multipaper.externalserverprotocol.TimeUpdatePacket;
-@@ -855,6 +856,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
+@@ -904,6 +905,7 @@ public class ServerLevel extends Level implements WorldGenLevel {
  
                  LightningBolt entitylightning = (LightningBolt) EntityType.LIGHTNING_BOLT.create(this);
  
@@ -25,7 +25,7 @@ index 8de4d199d29ce0d1dad075624c09dc864fa715a5..1f003c354cf77b22120ac256f5d37dbb
                      entitylightning.moveTo(Vec3.atBottomCenterOf(blockposition));
                      entitylightning.setVisualOnly(flag1);
 diff --git a/src/main/java/net/minecraft/world/entity/animal/allay/Allay.java b/src/main/java/net/minecraft/world/entity/animal/allay/Allay.java
-index c66a214dfbde7fd8e7a68efaa82ac260178f297f..aeac432c7e6392f350eef7fb1250210131e6d978 100644
+index e8f42ad6cc32cb21584d8988fcf3d1e4b6552f0c..90942f1ac6c937518adcc20625bc22630c87639e 100644
 --- a/src/main/java/net/minecraft/world/entity/animal/allay/Allay.java
 +++ b/src/main/java/net/minecraft/world/entity/animal/allay/Allay.java
 @@ -70,6 +70,7 @@ import net.minecraft.world.level.gameevent.vibrations.VibrationListener;
@@ -36,7 +36,7 @@ index c66a214dfbde7fd8e7a68efaa82ac260178f297f..aeac432c7e6392f350eef7fb12502101
  
  public class Allay extends PathfinderMob implements InventoryCarrier {
  
-@@ -606,7 +607,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
+@@ -663,7 +664,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
          this.level.addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
      }
  
@@ -45,7 +45,7 @@ index c66a214dfbde7fd8e7a68efaa82ac260178f297f..aeac432c7e6392f350eef7fb12502101
  
          AllayVibrationListenerConfig() {}
  
-@@ -639,9 +640,13 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
+@@ -696,9 +697,13 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
          public TagKey<GameEvent> getListenableEvents() {
              return GameEventTags.ALLAY_CAN_LISTEN;
          }
@@ -60,7 +60,7 @@ index c66a214dfbde7fd8e7a68efaa82ac260178f297f..aeac432c7e6392f350eef7fb12502101
  
          private final PositionSource listenerSource;
          private final int listenerRadius;
-@@ -673,5 +678,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
+@@ -730,5 +735,7 @@ public class Allay extends PathfinderMob implements InventoryCarrier {
                  return false;
              }
          }
@@ -69,7 +69,7 @@ index c66a214dfbde7fd8e7a68efaa82ac260178f297f..aeac432c7e6392f350eef7fb12502101
      }
  }
 diff --git a/src/main/java/net/minecraft/world/entity/monster/warden/Warden.java b/src/main/java/net/minecraft/world/entity/monster/warden/Warden.java
-index 904826ea563bd2eb469f403df459def62cc1b5e6..2e4d26c0850c42bfc5c330a5c3cc357066edc37d 100644
+index 17df2b09542f67cdd1d83f795d9b2aad9ccd4e05..cff9e79239f99a5096f832198e4fa1e0321b9a97 100644
 --- a/src/main/java/net/minecraft/world/entity/monster/warden/Warden.java
 +++ b/src/main/java/net/minecraft/world/entity/monster/warden/Warden.java
 @@ -107,7 +107,7 @@ public class Warden extends Monster implements VibrationListener.VibrationListen
@@ -108,7 +108,7 @@ index 0554afa72ae6d2f01886916031c8b90b0d45eb52..c0040eaa1a05b24f2d18b5a16bca84cd
      public SculkShriekerBlockEntity(BlockPos pos, BlockState state) {
          super(BlockEntityType.SCULK_SHRIEKER, pos, state);
 diff --git a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
-index 3d8e612c6c479bef8e41d0ed2e27fa3af8497906..e116e0e630b960bb92decc1865f1bd71078cf9ab 100644
+index 9150c5ca7d90ee85528d4f304afa88b9d2408400..0839150d0e8a4887ac5660dba510acfa67a9d1ec 100644
 --- a/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 +++ b/src/main/java/net/minecraft/world/level/chunk/LevelChunk.java
 @@ -817,7 +817,7 @@ public class LevelChunk extends ChunkAccess {

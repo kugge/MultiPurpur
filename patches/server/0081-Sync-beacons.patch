@@ -5,10 +5,10 @@ Subject: [PATCH] Sync beacons
 
 
 diff --git a/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java b/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
-index 1e7d14a021e870ae0126cd68a09ecfdcad2f203f..0269169a42563442d0a9799e295ef730d23fbe63 100644
+index f03383f0bbb402cf6c15f950ef6fee5fe1e26757..d2880c08e47f2ffd751b31d66195b68ec9f55b6c 100644
 --- a/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
 +++ b/src/main/java/net/minecraft/world/level/block/entity/BeaconBlockEntity.java
-@@ -141,6 +141,7 @@ public class BeaconBlockEntity extends BlockEntity implements MenuProvider, Name
+@@ -151,6 +151,7 @@ public class BeaconBlockEntity extends BlockEntity implements MenuProvider, Name
                          BeaconBlockEntity.this.secondaryPower = BeaconBlockEntity.getValidEffectById(value);
                  }
  
