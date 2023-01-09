@@ -5,7 +5,7 @@ Subject: [PATCH] Add getAllOnlinePlayers and getLocalOnlinePlayers
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 002d1bdf9ec722cf2b1a040c32067c67187fb2ab..c3008be61130e382a3cb0bb954c48bce61c47f39 100644
+index 4d4be75cdd718b83ded8776765757bc95e0a9160..92c9be0ba1084731cab78d24704c45ea13c0db37 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -117,6 +117,7 @@ public abstract class PlayerList {
@@ -18,13 +18,13 @@ index 002d1bdf9ec722cf2b1a040c32067c67187fb2ab..c3008be61130e382a3cb0bb954c48bce
      private final IpBanList ipBans;
 @@ -292,6 +293,7 @@ public abstract class PlayerList {
          player.sendServerStatus(this.server.getStatus());
-         player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players));
+         // player.connection.send(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(this.players)); // Paper - use single player info update packet
          this.players.add(player);
 +        if (!(player instanceof ExternalPlayer)) this.localPlayers.add(player); // MultiPaper
          this.playersByName.put(player.getScoreboardName().toLowerCase(java.util.Locale.ROOT), player); // Spigot
          this.playersByUUID.put(player.getUUID(), player);
          // this.broadcastAll(ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(entityplayer))); // CraftBukkit - replaced with loop below
-@@ -618,6 +620,7 @@ public abstract class PlayerList {
+@@ -624,6 +626,7 @@ public abstract class PlayerList {
          worldserver.removePlayerImmediately(entityplayer, Entity.RemovalReason.UNLOADED_WITH_PLAYER);
          entityplayer.getAdvancements().stopListening();
          this.players.remove(entityplayer);
@@ -32,7 +32,7 @@ index 002d1bdf9ec722cf2b1a040c32067c67187fb2ab..c3008be61130e382a3cb0bb954c48bce
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          this.server.getCustomBossEvents().onPlayerDisconnect(entityplayer);
          UUID uuid = entityplayer.getUUID();
-@@ -786,6 +789,7 @@ public abstract class PlayerList {
+@@ -792,6 +795,7 @@ public abstract class PlayerList {
          // MultiPaper end
          entityplayer.stopRiding(); // CraftBukkit
          this.players.remove(entityplayer);
@@ -40,7 +40,7 @@ index 002d1bdf9ec722cf2b1a040c32067c67187fb2ab..c3008be61130e382a3cb0bb954c48bce
          this.playersByName.remove(entityplayer.getScoreboardName().toLowerCase(java.util.Locale.ROOT)); // Spigot
          entityplayer.getLevel().removePlayerImmediately(entityplayer, Entity.RemovalReason.DISCARDED);
          BlockPos blockposition = entityplayer.getRespawnPosition();
-@@ -923,6 +927,7 @@ public abstract class PlayerList {
+@@ -929,6 +933,7 @@ public abstract class PlayerList {
          if (!entityplayer.connection.isDisconnected()) {
              worldserver1.addRespawnedPlayer(entityplayer1);
              this.players.add(entityplayer1);

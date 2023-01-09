@@ -5,7 +5,7 @@ Subject: [PATCH] Add useLocalPlayerCountForServerIsFullKick
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index db1ff07791b09f4fc383bba0229dec460200634c..e76ea0919a9647e4af8f953bfc98e0273cb7235f 100644
+index 355467f15f5054594fe4b94ac0829e9cf37e048b..4fe259cbcca6376f9d4f4fa2e986d64277a38960 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,6 +102,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
@@ -16,7 +16,7 @@ index db1ff07791b09f4fc383bba0229dec460200634c..e76ea0919a9647e4af8f953bfc98e027
  import puregero.multipaper.externalserverprotocol.*;
  // CraftBukkit end
  
-@@ -730,7 +731,8 @@ public abstract class PlayerList {
+@@ -736,7 +737,8 @@ public abstract class PlayerList {
              event.disallow(PlayerLoginEvent.Result.KICK_BANNED, PaperAdventure.asAdventure(ichatmutablecomponent)); // Paper - Adventure
          } else {
              // return this.players.size() >= this.maxPlayers && !this.canBypassPlayerLimit(gameprofile) ? IChatBaseComponent.translatable("multiplayer.disconnect.server_full") : null;

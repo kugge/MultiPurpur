@@ -304,7 +304,7 @@ index af0a4aa60d42464b95a5aa7819dc74a4a5bd28fe..fd61c88755fd4f100bf60126e277eff9
          this.clientViewDistance = packet.viewDistance;
          // CraftBukkit end
 diff --git a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
-index 823bc47aed8255fb19ea596a69c30522fba24d94..653d73ab16e855459415e04eff715f905eb05faa 100644
+index af730a5adcc86fe1e5ea0b1b67c43299c89ea832..81b88c006a6fb6c451c4a4102ecd26ddd6cf8cf6 100644
 --- a/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 +++ b/src/main/java/net/minecraft/server/network/ServerGamePacketListenerImpl.java
 @@ -245,6 +245,7 @@ import puregero.multipaper.ExternalPlayer;
@@ -332,7 +332,7 @@ index 823bc47aed8255fb19ea596a69c30522fba24d94..653d73ab16e855459415e04eff715f90
      }
  
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index cc025da710ba145405a5422cf3e6da5081848216..024f6c4eb6142b92e513fea0db99bf8efcf7f5ac 100644
+index 194102b40b1c2994fd6dce1873951ead08262c6f..af60b8b1200425b64c787ba72f4e97f091316572 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -102,10 +102,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
@@ -356,7 +356,7 @@ index cc025da710ba145405a5422cf3e6da5081848216..024f6c4eb6142b92e513fea0db99bf8e
          // CraftBukkit start - sendAll above replaced with this loop
          ClientboundPlayerInfoUpdatePacket packet = ClientboundPlayerInfoUpdatePacket.createPlayerInitializing(List.of(player));
  
-@@ -970,6 +969,7 @@ public abstract class PlayerList {
+@@ -976,6 +975,7 @@ public abstract class PlayerList {
  
                  if (subscribedToSoruce && subscribedToDestination) {
                      externalServer.getConnection().send(new PlayerChangeDimensionPacket(entityplayer1, !flag));

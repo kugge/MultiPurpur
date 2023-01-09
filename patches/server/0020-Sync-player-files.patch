@@ -69,10 +69,10 @@ index ce42e91a95ccd42deff65e1942b918e9d789001b..99477689bdf3e7d2fc1d66b56987aeb8
  
              try {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index 6af57d1a152c21b49bdb56351dd92f5ba15dea85..cc025da710ba145405a5422cf3e6da5081848216 100644
+index aeec351edc4fa1f514c2f0674bf939a891c2ac94..194102b40b1c2994fd6dce1873951ead08262c6f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -535,6 +535,7 @@ public abstract class PlayerList {
+@@ -541,6 +541,7 @@ public abstract class PlayerList {
          if (!player.getBukkitEntity().isPersistent()) return; // CraftBukkit
          player.lastSave = MinecraftServer.currentTick; // Paper
          this.playerIo.save(player);

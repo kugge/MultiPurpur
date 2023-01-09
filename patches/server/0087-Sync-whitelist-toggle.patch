@@ -5,10 +5,10 @@ Subject: [PATCH] Sync whitelist toggle
 
 
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index bb37b983e12b7dc4010be46e7122fb2accb19df4..002d1bdf9ec722cf2b1a040c32067c67187fb2ab 100644
+index b1eeee1b6162bb77c5db04c012bc07b821ccc00e..4d4be75cdd718b83ded8776765757bc95e0a9160 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
-@@ -1347,6 +1347,7 @@ public abstract class PlayerList {
+@@ -1353,6 +1353,7 @@ public abstract class PlayerList {
      public void setUsingWhiteList(boolean whitelistEnabled) {
          new com.destroystokyo.paper.event.server.WhitelistToggleEvent(whitelistEnabled).callEvent();
          this.doWhiteList = whitelistEnabled;
