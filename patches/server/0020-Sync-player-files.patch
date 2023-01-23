@@ -69,7 +69,7 @@ index ce42e91a95ccd42deff65e1942b918e9d789001b..99477689bdf3e7d2fc1d66b56987aeb8
  
              try {
 diff --git a/src/main/java/net/minecraft/server/players/PlayerList.java b/src/main/java/net/minecraft/server/players/PlayerList.java
-index aeec351edc4fa1f514c2f0674bf939a891c2ac94..194102b40b1c2994fd6dce1873951ead08262c6f 100644
+index bffef41525c10a5df581dfa390baef8a07e0c5cb..5fe96782fa6d13a6970baf39273e588186219f4f 100644
 --- a/src/main/java/net/minecraft/server/players/PlayerList.java
 +++ b/src/main/java/net/minecraft/server/players/PlayerList.java
 @@ -541,6 +541,7 @@ public abstract class PlayerList {
@@ -233,7 +233,7 @@ index 601f8099f74e81c17600566b3c9b7a6dd39c9bcb..64c581abc3b74ef25e0571e9bada5a42
  
              if (file1.exists()) {
 diff --git a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
-index ed5ee1f76aad6c27e742cb421a8e94990ebb7c59..2147f7df5fa25edb7bd128ab405735883dbaeec4 100644
+index 5a76c967e2d9c9c1b09e8de33fcde34e25b4646b..b8df48cb50650e2319ac1d6cd2354a591ff89c53 100644
 --- a/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/entity/CraftPlayer.java
 @@ -156,6 +156,7 @@ import org.bukkit.scoreboard.Scoreboard;
@@ -244,7 +244,7 @@ index ed5ee1f76aad6c27e742cb421a8e94990ebb7c59..2147f7df5fa25edb7bd128ab40573588
  
  @DelegateDeserialization(CraftOfflinePlayer.class)
  public class CraftPlayer extends CraftHumanEntity implements Player {
-@@ -1345,6 +1346,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
+@@ -1358,6 +1359,7 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
  
      @Override
      public void saveData() {

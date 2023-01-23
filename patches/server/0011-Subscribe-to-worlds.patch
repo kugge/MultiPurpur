@@ -5,7 +5,7 @@ Subject: [PATCH] Subscribe to worlds
 
 
 diff --git a/src/main/java/org/bukkit/craftbukkit/CraftServer.java b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
-index e5c51a552134cb4ec4b81ffe7b126e4955dcd3be..830423baa018b61409e9626b79feaf19d455890f 100644
+index b93ca28467ffa186fd648377990b779f85ff6c1a..bccfbb58a1c8b86cb68f936c99a894e0c8f7e6db 100644
 --- a/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 +++ b/src/main/java/org/bukkit/craftbukkit/CraftServer.java
 @@ -257,6 +257,8 @@ import org.yaml.snakeyaml.constructor.SafeConstructor;
@@ -17,7 +17,7 @@ index e5c51a552134cb4ec4b81ffe7b126e4955dcd3be..830423baa018b61409e9626b79feaf19
  import puregero.multipaper.permissions.MultiPaperPermissions;
  
  import javax.annotation.Nullable; // Paper
-@@ -1432,6 +1434,7 @@ public final class CraftServer implements Server {
+@@ -1438,6 +1440,7 @@ public final class CraftServer implements Server {
              return;
          }
          this.worlds.put(world.getName().toLowerCase(java.util.Locale.ENGLISH), world);
